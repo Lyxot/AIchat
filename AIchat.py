@@ -68,14 +68,14 @@ def on_info(server, info):
             language = detect(info.content)
         except:
             language = 'zh-cn'
-    if info.is_player and language == 'zh-cn':
+    if info.is_player and language == 'zh-cn' and info.content[0:2] != '!!':
         comment = info.content
         answer = get_content(comment)
         if answer != '':
             server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
         else:
             pass
-    elif info.is_player and language != 'zh-cn':
+    elif info.is_player and language != 'zh-cn' and info.content[0:2] != '!!':
         # 将信息翻译为中文后回复
         comment = info.content
         txt = comment
