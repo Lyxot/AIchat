@@ -2,6 +2,13 @@
 一个借助腾讯AI实现智能聊天机器人的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件
 
 ***
+
+## 简介
+借助腾讯AI实现智能聊天,并附带有道翻译机器人
+![image](https://github.com/A-jiu-a/AIchat/blob/master/pictures/0.png)
+
+***
+
 ## 使用方式:
 将AIchat.py放入MCDReforge下的plugins文件夹中,将你的APPid与APIkey填入AIchat.py开头的变量中
 例如:
@@ -19,3 +26,6 @@ app_key = 'xxxxxxxxxxxxxx'
 ![image](https://github.com/A-jiu-a/AIchat/blob/master/pictures/3.png)
 在上方应用管理中找到你的应用,点击进入,进入应用信息栏,找到你的APPid与APIkey,填入AIchat.py开头的变量中
 ![image](https://github.com/A-jiu-a/AIchat/blob/master/pictures/4.png)
+
+你也可以自行配置你的闲聊画像
+![image](https://github.com/A-jiu-a/AIchat/blob/master/pictures/5.png)
