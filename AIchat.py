@@ -4,7 +4,6 @@ import time
 import random  
 import string  
 import requests   
-from langdetect import detect
 try:
     from urllib import quote
 except:
@@ -65,7 +64,7 @@ def on_info(server, info):
         language = 'zh-cn'
     elif info.is_player:        
         try:
-            language = detect(info.content)
+            language = 'else'
         except:
             language = 'zh-cn'
     if info.is_player and language == 'zh-cn' and info.content[0:2] != '!!':
