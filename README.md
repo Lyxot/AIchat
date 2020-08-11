@@ -2,7 +2,7 @@
 一个借助腾讯AI实现智能聊天机器人的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件
 
 ***
-##使用方式:
+## 使用方式:
 将AIchat.py放入MCDReforge下的plugins文件夹中,将你的APPid与APIkey填入AIchat.py开头的变量中
 例如:
 ```
@@ -10,7 +10,7 @@ app_id = '111111111'
 app_key = 'xxxxxxxxxxxxxx'
 ```
 
-##APPid与APIkey申请教程:
+## APPid与APIkey申请教程:
 前往[腾讯AI开放平台](https://ai.qq.com/console/),完成注册后会自动进入[创建应用](https://ai.qq.com/console/application/create-app)的界面,填写信息,点击创建按钮
 ![image](https://github.com/A-jiu-a/AIchat/blob/master/pictures/1.png)
 提示创建成功,点击接入能力,找到智能闲聊>智能闲聊,点击进入
