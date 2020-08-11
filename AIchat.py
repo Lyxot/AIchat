@@ -11,8 +11,8 @@ except:
     from urllib.parse import quote
 
 # 这里修改成自己的id和key  
-app_id = '2129202119'  
-app_key = '0tKzjwpGpGejapgF'
+app_id = '111111111'  
+app_key = 'xxxxxxxxxxxxxxxx'
 
 def curlmd5(src):  
     m = hashlib.md5(src.encode('UTF-8'))  
@@ -74,7 +74,7 @@ def on_info(server, info):
         if answer != '':
             server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
         else:
-            server.execute('tellraw @a {"text":"<智能聊天> 你说的什么意思呀","color":"aqua"}')
+            pass
     elif info.is_player and language != 'zh-cn':
         # 将信息翻译为中文后回复
         comment = info.content
@@ -101,6 +101,6 @@ def on_info(server, info):
             if answer != '':
                 server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
             else:
-                server.execute('tellraw @a {"text":"<智能聊天> 你说的什么意思呀","color":"aqua"}')
+                pass
         else:
-            server.execute('tellraw @a {"text":"<智能聊天> 你说的什么意思呀","color":"aqua"}')
+            pass
