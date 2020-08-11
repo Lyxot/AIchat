@@ -10,7 +10,7 @@
 ***
 
 ## 使用方式:
-将AIchat.py放入MCDReforge下的plugins文件夹中,将你的APPid与APIkey填入AIchat.py开头的变量中
+将AIchat.py放入MCDReforge主目录下的plugins文件夹中,将你的APPid与APIkey填入AIchat.py开头的变量中
 例如:
 ```
 app_id = '111111111'
