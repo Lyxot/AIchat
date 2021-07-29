@@ -9,6 +9,14 @@ try:
 except:
     from urllib.parse import quote
 
+PLUGIN_METADATA = {
+    'id': 'ai_chat',
+    'version': '1.0.0',
+    'name': 'AIchat',
+    'author': 'A-JiuA',
+    'link': 'https://github.com/A-JiuA/AIchat'
+}
+
 # 这里修改成自己的id和key  
 app_id = '111111111'  
 app_key = 'xxxxxxxxxxxxxxxx'
