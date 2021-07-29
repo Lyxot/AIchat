@@ -17,7 +17,11 @@ PLUGIN_METADATA = {
     'link': 'https://github.com/A-JiuA/AIchat'
 }
 
-# 这里修改成自己的id和key
+# 设置AI回复默认关闭
+CHAT_SWITCH = False
+TRANSLATE_SWITCH = True
+
+# 这里修改成自己的id和key，CHAT_SWITCH为关时可以不配置
 app_id = '111111111'
 app_key = 'xxxxxxxxxxxxxxxx'
 
@@ -79,14 +83,14 @@ def on_info(server, info):
             language = 'else'
         except:
             language = 'zh-cn'
-    if info.is_player and language == 'zh-cn' and info.content[0:2] != '!!':
+    if info.is_player and language == 'zh-cn' and info.content[0:2] != '!!' and CHAT_SWITCH:
         comment = info.content
         answer = get_content(comment)
         if answer != '':
             server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
         else:
             pass
-    elif info.is_player and language != 'zh-cn' and info.content[0:2] != '!!':
+    elif info.is_player and language != 'zh-cn' and info.content[0:2] != '!!' and TRANSLATE_SWITCH:
         # 将信息翻译为中文后回复
         comment = info.content
         txt = comment
@@ -108,9 +112,12 @@ def on_info(server, info):
         comment = js['translateResult'][0][0]['tgt']
         if comment != txt:
             server.execute('tellraw @a {"text":"<翻译君> %s","color":"yellow"}' % (comment))
-            answer = get_content(comment)
-            if answer != '':
-                server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
+            if CHAT_SWITCH:
+                answer = get_content(comment)
+                if answer != '':
+                    server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
+                else:
+                    pass
             else:
                 pass
         else:
