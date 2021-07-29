@@ -3,7 +3,11 @@ import hashlib
 import time
 import random
 import string
+from json import JSONDecodeError
+
 import requests
+from requests import ReadTimeout, ConnectTimeout
+
 try:
     from urllib import quote
 except:
@@ -63,8 +67,16 @@ def get_content(plus_item):
     # 获取请求参数
     plus_item = plus_item.encode('utf-8')
     payload = get_params(plus_item)
-    r = requests.post(url,data=payload)
-    return r.json()["data"]["answer"]
+    try:
+        try:
+            r = requests.post(url, data=payload, timeout=2)
+            return r.json()["data"]["answer"]
+        except JSONDecodeError:
+            error_message = "AI聊天id或key配置错误"
+            return error_message
+    except (ReadTimeout, ConnectTimeout):
+        error_message = "AI聊天接口超时"
+        return error_message
 
 
 # 中文判断
@@ -83,14 +95,7 @@ def on_info(server, info):
             language = 'else'
         except:
             language = 'zh-cn'
-    if info.is_player and language == 'zh-cn' and info.content[0:2] != '!!' and CHAT_SWITCH:
-        comment = info.content
-        answer = get_content(comment)
-        if answer != '':
-            server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
-        else:
-            pass
-    elif info.is_player and language != 'zh-cn' and info.content[0:2] != '!!' and TRANSLATE_SWITCH:
+    if info.is_player and language != 'zh-cn' and info.content[0:2] != '!!' and TRANSLATE_SWITCH:
         # 将信息翻译为中文后回复
         comment = info.content
         txt = comment
@@ -107,18 +112,22 @@ def on_info(server, info):
             "typoResult": "true"
         }
         url = "http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule"
-        res = requests.post(url, data=data)
-        js = res.json()
-        comment = js['translateResult'][0][0]['tgt']
-        if comment != txt:
-            server.execute('tellraw @a {"text":"<翻译君> %s","color":"yellow"}' % (comment))
-            if CHAT_SWITCH:
-                answer = get_content(comment)
-                if answer != '':
-                    server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % (answer))
-                else:
-                    pass
+        try:
+            res = requests.post(url, data=data, timeout=2)
+            js = res.json()
+            comment = js['translateResult'][0][0]['tgt']
+            if comment != txt:
+                server.execute('tellraw @a {"text":"<翻译君> %s","color":"yellow"}' % comment)
             else:
                 pass
+        except (ReadTimeout, ConnectTimeout):
+            error_message = "有道翻译接口超时"
+            server.execute('tellraw @a {"text":"<翻译君> %s","color":"yellow"}' % error_message)
+            pass
+    if info.is_player and info.content[0:2] != '!!' and CHAT_SWITCH:
+        comment = info.content
+        answer = get_content(comment)
+        if answer != '':
+            server.execute('tellraw @a {"text":"<智能聊天> %s","color":"aqua"}' % answer)
         else:
             pass
