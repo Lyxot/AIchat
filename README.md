@@ -32,4 +32,4 @@ TRANSLATE_SWITCH = False
 ## APIkey申请教程:
 暂无
 
-[图灵机器人]http://www.turingapi.com/
+[图灵机器人](http://www.turingapi.com)
