@@ -1,3 +1,5 @@
+# 此版本插件未适配1.x版本
+
 # AIchat
 一个借助腾讯AI实现智能聊天机器人的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件
 
