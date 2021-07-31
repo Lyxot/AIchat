@@ -1,10 +1,12 @@
 # AIchat
 一个借助图灵机器人实现智能聊天机器人的[MCDReforged](https://github.com/Fallen-Breath/MCDReforged)插件
+
 _使用腾讯AI的版本可以在`Tencent-AI`分支找到_
 ***
 
 ## 简介
 借助腾讯AI实现智能聊天,并附带有道翻译机器人
+
 ![image](https://github.com/A-JiuA/AIchat/blob/master/pictures/0.png)
 
 ***
