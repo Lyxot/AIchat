@@ -10,11 +10,22 @@
 ***
 
 ## 使用方式:
-将AIchat.py放入MCDReforge主目录下的plugins文件夹中,将你的APPid与APIkey填入AIchat.py开头的变量中
-例如:
+将AIchat.py放入MCDReforge主目录下的plugins文件夹中。
+
+如果仅使用翻译功能，不需要配置即可使用。
+
+如需启用智能聊天功能，将你的APPid与APIkey填入AIchat.py开头的变量中，例如:
 ```
 app_id = '111111111'
 app_key = 'xxxxxxxxxxxxxx'
+```
+然后把智能聊天功能启用，将`CHAT_SWITCH`设置为`True`，例如:
+```
+CHAT_SWITCH = True
+```
+如需关闭翻译功能，将`TRANSLATE_SWITCH`设置为`False`，例如:
+```
+TRANSLATE_SWITCH = False
 ```
 
 ## APPid与APIkey申请教程:
