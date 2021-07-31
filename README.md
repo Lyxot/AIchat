@@ -7,6 +7,7 @@
 
 ## 简介
 借助腾讯AI实现智能聊天,并附带有道翻译机器人
+
 ![image](https://github.com/A-JiuA/AIchat/blob/master/pictures/0.png)
 
 ***
