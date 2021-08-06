@@ -21,6 +21,9 @@ app_key = 'xxxxxxxxxxxxxx'
 ```
 
 ## APPid与APIkey申请教程:
+
+_腾讯AI申请方式已变更,请以实际为准_
+
 前往[腾讯AI开放平台](https://ai.qq.com/console/),完成注册后会自动进入[创建应用](https://ai.qq.com/console/application/create-app)的界面,填写信息,点击创建按钮
 ![image](https://github.com/A-JiuA/AIchat/blob/master/pictures/1.png)
 提示创建成功,点击接入能力,找到智能闲聊>智能闲聊,点击进入
