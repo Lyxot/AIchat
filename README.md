@@ -24,9 +24,15 @@ TULING_API_KEY = 'xxxxxxxxxx'
 ```
 CHAT_SWITCH = True
 ```
-如需关闭翻译功能，将`TRANSLATE_SWITCH`设置为`False`，例如:
+如需关闭翻译功能(不影响指令翻译)，将`TRANSLATE_SWITCH`设置为`False`，例如:
 ```
 TRANSLATE_SWITCH = False
+```
+
+## 指令: 
+翻译指令后面的内容
+```
+!!t <text>
 ```
 
 ## APIkey申请教程:
