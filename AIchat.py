@@ -9,7 +9,7 @@ from json import JSONDecodeError
 import requests
 from requests import ReadTimeout, ConnectTimeout
 
-from mcdreforged.api.decorator import new_thread
+from mcdreforged.api.all import *
 
 try:
     from urllib import quote
@@ -24,8 +24,10 @@ PLUGIN_METADATA = {
     'link': 'https://github.com/A-JiuA/AIchat'
 }
 
-# 设置AI回复默认关闭
+# 此处开关后会监听不带指令的对话
+# 机器人聊天功能
 CHAT_SWITCH = False
+# 翻译功能(不影响指令)
 TRANSLATE_SWITCH = True
 
 # 这里修改成自己的key，CHAT_SWITCH为关时可以不配置
@@ -157,7 +159,7 @@ def translate_feature(comment, server, player_name):
         comment = js['translateResult'][0][0]['tgt']
         if comment != txt:
             server.execute('tellraw @a {"text":"<翻译君> %s","color":"yellow"}' % comment)
-            if CHAT_SWITCH:
+            if CHAT_SWITCH and player_name:
                 ai_chat_feature(comment, server, player_name)
         else:
             pass
@@ -169,17 +171,32 @@ def translate_feature(comment, server, player_name):
 
 def on_info(server, info):
     if info.is_player:
-        if is_contains_chinese(info.content):
-            language = 'zh-cn'
-        else:
-            try:
-                language = 'else'
-            except:
+        if info.content[0:2] != '!!':
+            if is_contains_chinese(info.content):
                 language = 'zh-cn'
-        comment = info.content
-        player_name = info.player
-        if language != 'zh-cn' and info.content[0:2] != '!!' and TRANSLATE_SWITCH:
-            # 将信息翻译为中文后回复
-            translate_feature(comment, server, player_name)
-        elif language == 'zh-cn' and info.content[0:2] != '!!' and CHAT_SWITCH:
-            ai_chat_feature(comment, server, player_name)
+            else:
+                try:
+                    language = 'else'
+                except:
+                    language = 'zh-cn'
+            comment = info.content
+            player_name = info.player
+            if language != 'zh-cn' and TRANSLATE_SWITCH:
+                # 将信息翻译为中文后回复
+                translate_feature(comment, server, player_name)
+            elif language == 'zh-cn' and CHAT_SWITCH:
+                ai_chat_feature(comment, server, player_name)
+
+
+def on_load(server, prev):
+    def command_t(src, ctx):
+        player_name = None
+        translate_feature(comment=ctx['message'], server=server, player_name=player_name)
+    # 指令甚至可以翻译中文(手动狗头)
+    server.register_help_message('!!t', '翻译后面的话(仅翻译)')
+    server.register_command(
+        Literal('!!t').then(
+            GreedyText('message').runs(command_t)
+        )
+    )
+
